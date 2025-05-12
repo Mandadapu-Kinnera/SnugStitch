@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Over - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #FF3F6C;
+            --light: #FFFFFF;
+            --gray: #040405;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--gray);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            margin-top: 100px;
+            height: 20vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            color: var(--light);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--light);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 3/4;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .category-name {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            color: var(--light);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .category-name {
+                font-size: 1.2rem;
+                bottom: 1rem;
+                left: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .nav-icon span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="/logout" class="nav-icon">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Make Over</h1>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2 class="section-title">Shop Make Over</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <a href="{{ url_for('lipproducts') }}">
+                    <img src="https://i.pinimg.com/736x/fd/ff/fe/fdfffe2cca965c3d87bdbe5ec9029d3f.jpg">
+                    <div class="category-name">Lip Products</div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="{{ url_for('foundation') }}">
+                    <img src="https://i.pinimg.com/736x/3b/96/8b/3b968b445e32953f2a6536b22f1a46e3.jpg">
+                    <div class="category-name">Foundations</div>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="{{ url_for('blush') }}">
+                    <img src="https://i.pinimg.com/736x/30/0e/f0/300ef026c1acb6ceb81d4f66441ee583.jpg">
+                    <div class="category-name">Blush Powers</div>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="{{ url_for('compact') }}">
+                    <img src="https://i.pinimg.com/736x/db/a7/e6/dba7e6d857cb8e8d08a7840f7ed5bb51.jpg">
+                    <div class="category-name">Compact Power</div>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="{{ url_for('eyeproducts') }}">
+                    <img src="https://i.pinimg.com/474x/4a/89/fb/4a89fb7260da5fbfe8028b0704511d2c.jpg">
+                    <div class="category-name">Eye Products</div>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="{{ url_for('concelear') }}">
+                    <img src="https://i.pinimg.com/1200x/a2/36/cf/a236cf7cf0705b0b99215919d21e83f0.jpg">
+                    <div class="category-name">Concealer</div>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="{{ url_for('blender') }}">
+                    <img src="https://i.pinimg.com/474x/2d/3a/6a/2d3a6aac1f643a81c3ce4e1679d33ebb.jpg">
+                    <div class="category-name">Blenders</div>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

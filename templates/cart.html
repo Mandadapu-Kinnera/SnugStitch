@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #010101;
+            --light: #FFFFFF;
+            --gray: #050505;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .cart-container {
+            margin-top: 100px;
+            padding: 2rem 5%;
+            color: var(--light);
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .cart-items {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cart-item {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .cart-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .item-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            color: var(--dark);
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity-btn {
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--secondary);
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: auto;
+        }
+
+        .remove-btn:hover {
+            color: var(--secondary);
+        }
+
+        .cart-summary {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            position: sticky;
+            bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .checkout-btn {
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--light);
+            padding: 4rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        
+    </nav>
+
+    <div class="cart-container">
+        <div class="cart-header">
+            <h1>Your Shopping Cart</h1>
+            <p>Review and manage your items</p>
+        </div>
+
+        {% if cart_items %}
+        <div class="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.image }}" alt="{{ item.name }}" class="item-image">
+                <div class="item-details">
+                    <div class="item-name">{{ item.name }}</div>
+                    <div class="item-price">₹{{ "%.2f"|format(item.price) }}</div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span>{{ item.quantity }}</span>
+                        <button class="quantity-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="remove-btn">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal ({{ cart_items|length }} items):</span>
+                <span class="total">₹{{ "%.2f"|format(total) }}</span>
+            </div>
+            <button class="checkout-btn">
+                Proceed to Checkout <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        {% else %}
+        <div class="empty-cart">
+            <i class="fas fa-shopping-cart fa-3x" style="margin-bottom: 1rem; color: var(--primary);"></i>
+            <p>Your cart is empty. Start shopping now!</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

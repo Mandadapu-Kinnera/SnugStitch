@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compact Powders - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .compact-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .compact-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .compact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .compact-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .compact-info {
+            padding: 1.5rem;
+        }
+
+        .compact-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .compact-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .compact-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Compact Powders</h1>
+            <p>Explore our collection of compact powders to keep your skin fresh, matte, and shine-free all day.</p>
+        </div>
+
+        <div class="compact-products">
+            <!-- Matte Compact -->
+            <div class="compact-card" onclick="location.href='/compact/matte'">
+                <img src="https://i.pinimg.com/474x/7f/0a/4d/7f0a4dd73dafe9a02dbaa433d4458d68.jpg"
+                     class="compact-img" alt="Matte Compact">
+                <div class="compact-info">
+                    <h3>Matte Compact</h3>
+                    <p>Perfect for a soft, matte finish to control excess shine.</p>
+                    <p class="price">₹499</p>
+                </div>
+            </div>
+
+            <!-- Shimmer Compact -->
+            <div class="compact-card" onclick="location.href='/compact/shimmer'">
+                <img src="https://i.pinimg.com/474x/45/b2/cc/45b2cc09d2459c6ade0c0d7eae2688b6.jpg"
+                     class="compact-img" alt="Shimmer Compact">
+                <div class="compact-info">
+                    <h3>Shimmer Compact</h3>
+                    <p>Add a radiant glow and subtle shimmer to your skin.</p>
+                    <p class="price">₹599 </p>
+                </div>
+            </div>
+
+            <!-- Translucent Compact -->
+            <div class="compact-card" onclick="location.href='/compact/translucent'">
+                <img src="https://i.pinimg.com/474x/82/0f/04/820f049631cdf0e03a757c1ec234ff6b.jpg"
+                     class="compact-img" alt="Translucent Compact">
+                <div class="compact-info">
+                    <h3>Translucent Compact</h3>
+                    <p>Lightweight translucent powder for a natural finish.</p>
+                    <p class="price">₹699</p>
+                </div>
+            </div>
+
+            <!-- Compact Powder Palette -->
+            <div class="compact-card" onclick="location.href='/compact/palette'">
+                <img src="https://i.pinimg.com/736x/76/81/7e/76817ebe90ccac55b8bcd81f10e6338b.jpg" 
+                     class="compact-img" alt="Compact Powder Palette">
+                <div class="compact-info">
+                    <h3>Compact Powder Palette</h3>
+                    <p>Mix and match different shades with a versatile palette.</p>
+                    <p class="price">₹1,299</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

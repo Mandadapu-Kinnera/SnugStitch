@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watches - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .watch-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .watch-card {
+            background: var(--dark);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .watch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .watch-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .watch-info {
+            padding: 1.5rem;
+        }
+
+        .watch-info h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .watch-info p {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .watch-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Watches</h1>
+            <p>Explore a wide range of stylish, elegant, and functional watches that complement every occasion.</p>
+        </div>
+
+        <div class="watch-products">
+            <!-- Analog Watch -->
+            <div class="watch-card" onclick="location.href='/watches/analog'">
+                <img src="https://i.pinimg.com/736x/d6/24/d4/d624d461dfcfad579f5953209a8bb0c8.jpg"
+                     class="watch-img" alt="Analog Watch">
+                <div class="watch-info">
+                    <h3>Analog Watch</h3>
+                    <p>Classic elegance for timeless style.</p>
+                    <p class="price">&#8377;2,999 - &#8377;10,000</p>
+                </div>
+            </div>
+
+            <!-- Digital Watch -->
+            <div class="watch-card" onclick="location.href='/watches/digital'">
+                <img src="https://i.pinimg.com/736x/99/85/5a/99855a73d2cfbbb9d4cd05dd65775f9e.jpg"
+                     class="watch-img" alt="Digital Watch">
+                <div class="watch-info">
+                    <h3>Digital Watch</h3>
+                    <p>Modern design with smart features.</p>
+                    <p class="price">&#8377;1,999 - &#8377;8,000</p>
+                </div>
+            </div>
+
+            <!-- Sports Watch -->
+            <div class="watch-card" onclick="location.href='/watches/sports'">
+                <img src="https://i.pinimg.com/736x/e7/1e/3f/e71e3f9bb2473be5b3590d1b5b8c5149.jpg"
+                     class="watch-img" alt="Sports Watch">
+                <div class="watch-info">
+                    <h3>Sports Watch</h3>
+                    <p>Durable and performance-driven design.</p>
+                    <p class="price">&#8377;2,499 - &#8377;12,000</p>
+                </div>
+            </div>
+
+            <!-- Luxury Watch -->
+            <div class="watch-card" onclick="location.href='/watches/luxury'">
+                <img src="https://i.pinimg.com/474x/c2/d5/fe/c2d5fe51a46ec4929696babe76a8e455.jpg"
+                     class="watch-img" alt="Luxury Watch">
+                <div class="watch-info">
+                    <h3>Luxury Watch</h3>
+                    <p>Exquisite craftsmanship and luxury appeal.</p>
+                    <p class="price">&#8377;15,000 - &#8377;1,00,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

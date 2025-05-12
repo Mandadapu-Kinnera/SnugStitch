@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Mechanics - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #333;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hair-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hair-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .hair-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .hair-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .hair-info {
+            padding: 1.5rem;
+        }
+
+        .hair-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hair-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .hair-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Hair Machines</h1>
+            <p>Explore our collection of top-quality hair dryers, hair straighteners, curling irons, and other essential hair styling tools.</p>
+        </div>
+
+        <div class="hair-products">
+            <!-- Hair Dryer -->
+            <div class="hair-card" onclick="location.href='/mechanics/hair-dryer'">
+                <img src="https://i.pinimg.com/736x/98/44/fc/9844fc56ee71ebdd571fe6f9477e8421.jpg"
+                     class="hair-img" alt="Hair Dryer">
+                <div class="hair-info">
+                    <h3>Hair Dryer</h3>
+                    <p>Powerful and lightweight for fast, salon-style drying.</p>
+                    <p class="price">₹1,299 - ₹3,500</p>
+                </div>
+            </div>
+
+            <!-- Hair Straightener -->
+            <div class="hair-card" onclick="location.href='/mechanics/hair-straightener'">
+                <img src="https://i.pinimg.com/736x/8b/f1/72/8bf172f1162ad9dc43a0126d99a8b5f1.jpg"
+                     class="hair-img" alt="Hair Straightener">
+                <div class="hair-info">
+                    <h3>Hair Straightener</h3>
+                    <p>Sleek, frizz-free hair with advanced ceramic technology.</p>
+                    <p class="price">₹1,799 - ₹4,500</p>
+                </div>
+            </div>
+
+            <!-- Curling Iron -->
+            <div class="hair-card" onclick="location.href='/mechanics/curling-iron'">
+                <img src="https://i.pinimg.com/736x/cb/e0/2e/cbe02eea4a92464dd7d0c42072bc93a4.jpg"
+                     class="hair-img" alt="Curling Iron">
+                <div class="hair-info">
+                    <h3>Curling Iron</h3>
+                    <p>Create perfect curls and waves with ease.</p>
+                    <p class="price">₹1,599 - ₹3,800</p>
+                </div>
+            </div>
+
+            <!-- Hair Styling Brush -->
+            <div class="hair-card" onclick="location.href='/mechanics/styling-brush'">
+                <img src="https://i.pinimg.com/736x/dc/e7/10/dce710b8f0558e4bd1ea4221b8feb7d0.jpg"
+                     class="hair-img" alt="Hair Styling Brush">
+                <div class="hair-info">
+                    <h3>Hair Styling Brush</h3>
+                    <p>Multi-functional brush for smooth and polished styling.</p>
+                    <p class="price">₹999 - ₹2,200</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

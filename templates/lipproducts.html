@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lip Products - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .lip-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .lip-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .lip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .lip-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .lip-info {
+            padding: 1.5rem;
+        }
+
+        .lip-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .lip-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .lip-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Lip Products</h1>
+            <p>Explore a variety of lip products designed to give your lips color, hydration, and shine.</p>
+        </div>
+
+        <div class="lip-products">
+            <!-- Liquid Lipstick -->
+            <div class="lip-card" onclick="location.href='/lip/liquid-lipstick'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.33.06%20-%20A%20high-quality%20matte%20liquid%20lipstick%20from%20the%20brand%20SnugStitch.%20The%20lipstick%20comes%20in%20a%20sleek%20frosted%20glass%20tube%20with%20a%20black%20cap%20and%20a%20doe-foot%20appli.webp" 
+                     class="lip-img" alt="Liquid Lipstick">
+                <div class="lip-info">
+                    <h3>Liquid Lipstick</h3>
+                    <p>Long-lasting, richly pigmented, and transfer-proof.</p>
+                    <p class="price">₹1099 </p>
+                </div>
+            </div>
+
+            <!-- Matte Lipstick -->
+            <div class="lip-card" onclick="location.href='/lip/matte-lipstick'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.33.25%20-%20A%20high-quality%20creamy%20bullet%20lipstick%20from%20the%20brand%20SnugStitch.%20The%20lipstick%20comes%20in%20a%20sleek%20black%20and%20gold%20tube%20with%20a%20luxurious%20design.%20The%20packag.webp"
+                     class="lip-img" alt="Matte Lipstick">
+                <div class="lip-info">
+                    <h3>Matte Lipstick</h3>
+                    <p>Velvety matte finish with intense color payoff.</p>
+                    <p class="price">₹999 </p>
+                </div>
+            </div>
+
+            <!-- Lip Gloss -->
+            <div class="lip-card" onclick="location.href='/lip/lip-gloss'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.34.03%20-%20A%20high-quality%20lip%20gloss%20from%20the%20brand%20SnugStitch.%20The%20lip%20gloss%20comes%20in%20a%20sleek%20clear%20tube%20with%20a%20black%20cap%20and%20a%20doe-foot%20applicator.%20The%20packagin.webp"
+                     class="lip-img" alt="Lip Gloss">
+                <div class="lip-info">
+                    <h3>Lip Gloss</h3>
+                    <p>Hydrating formula with high-shine finish for plump lips.</p>
+                    <p class="price">₹899 </p>
+                </div>
+            </div>
+            
+
+            <!-- Lip Balm -->
+            <div class="lip-card" onclick="location.href='/lip/lip-balm'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.33.43%20-%20A%20high-quality%20tinted%20lip%20balm%20from%20the%20brand%20SnugStitch.%20The%20lip%20balm%20comes%20in%20a%20sleek%20tube%20with%20a%20twist-up%20mechanism.%20The%20packaging%20is%20modern%20and%20el.webp"
+                     class="lip-img" alt="Lip Balm">
+                <div class="lip-info">
+                    <h3>Lip Balm</h3>
+                    <p>Nourishing and protective lip care for soft, supple lips.</p>
+                    <p class="price">₹1,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

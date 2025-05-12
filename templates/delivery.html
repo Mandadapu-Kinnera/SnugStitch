@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightning Delivery - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF3F6C;
+            --dark: #010101;
+            --light: #FFFFFF;
+            --gray: #050505;
+            --transition: all 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.4;
+        }
+
+
+    .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--secondary);
+        }
+
+        .hero-delivery {
+            margin-top: 80px;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #140909 0%, #0a0a0a 100%);
+            text-align: center;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-delivery h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .delivery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+        }
+
+        .delivery-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .delivery-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .delivery-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .delivery-icon::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,63,108,0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .delivery-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .delivery-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .time-badge {
+            background: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-delivery h1 {
+                font-size: 2.5rem;
+            }
+            
+            .delivery-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="/logout" class="nav-icon">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero-delivery">
+        <h1>Get Fast Delivery</h1>
+        <div class="animated">
+            <img src="https://cdn-icons-png.flaticon.com/128/11528/11528866.png">
+        </div>
+    </section>
+    
+    <div class="delivery-container">
+        <div class="delivery-card">
+            <i class="fas fa-rocket delivery-icon"></i>
+            <h2>Instant Delivery</h2>
+            <p>Get standard items delivered within minutes through our hyper-local delivery network</p>
+            <div class="time-badge">Within 60 Minutes!</div>
+        </div>
+
+        <div class="delivery-card">
+            <i class="fas fa-tools delivery-icon"></i>
+            <h2>Customized Products</h2>
+            <p>Handcrafted items designed by our experts according to your requirements</p>
+            <div class="time-badge">2-3 Business Days</div>
+        </div>
+
+        <div class="delivery-card">
+            <i class="fas fa-clock delivery-icon"></i>
+            <h2>Real-Time Tracking</h2>
+            <p>Track your order in real-time with our advanced tracking system</p>
+            <div class="time-badge">Live Updates</div>
+        </div>
+    </div>
+</body>
+</html> 
+

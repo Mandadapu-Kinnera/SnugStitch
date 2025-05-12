@@ -1,0 +1,13 @@
+SELECT 
+    users.username,
+    users.email,
+    COUNT(custom_orders.id) AS total_custom_orders,
+    COUNT(custom_orders_enhanced.id) AS total_custom_orders_enhanced
+FROM users
+LEFT JOIN custom_orders ON custom_orders.user_id = users.id
+LEFT JOIN custom_orders_enhanced ON custom_orders_enhanced.user_id = users.id
+GROUP BY users.id
+ORDER BY total_custom_orders + total_custom_orders_enhanced DESC;
+
+
+-- to know total orders

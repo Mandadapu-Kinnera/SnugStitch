@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnugStitch - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #2c3e50;
+            --light: #FFFFFF;
+            --gray: #040405;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: var(--gray);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        } 
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card p {
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn-primary {
+            background: var(--primary);
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .action-btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,63,108,0.3);
+        }
+
+        .logout-btn {
+    color: pink;
+    cursor: pointer;
+}
+
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/home" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/logout" class="nav-icon">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+            
+        </div>
+    </nav>
+    
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1><i class="fas fa-user-circle"></i> Welcome, {{ username }}!</h1>
+            <p>Manage your fashion journey with us</p>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-card">
+                <h3><i class="fas fa-user"></i> Account Details</h3>
+                <p><strong>Username:</strong> {{ username }}</p>
+                <p><strong>Email:</strong> {{ email }}</p>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                <p>Last Login: Just now</p>
+                <p>Orders: 0</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="#" class="action-btn action-btn-primary">
+                <i class="fas fa-edit"></i> Edit Profile
+            </a>
+            <a href="#" class="action-btn action-btn-outline">
+                <i class="fas fa-box"></i> Order History
+            </a>
+            <a href="#" class="action-btn action-btn-outline">
+                <i class="fas fa-heart"></i> Wishlist
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
+
+

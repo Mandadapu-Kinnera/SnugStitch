@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Care - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hair-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hair-card {
+            background: var(--dark);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .hair-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .hair-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .hair-info {
+            padding: 1.5rem;
+        }
+
+        .hair-info h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+
+        .hair-info p {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .hair-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Hair Care</h1>
+            <p>Discover nourishing, hydrating, and strengthening hair care products for beautiful and healthy hair.</p>
+        </div>
+
+        <div class="hair-products">
+            <!-- Shampoo -->
+            <div class="hair-card" onclick="location.href='/hair/shampoo'">
+                <img src="https://i.pinimg.com/736x/ff/6a/e7/ff6ae79c1a2d60449f24d882237021b5.jpg"
+                     class="hair-img" alt="Shampoo">
+                <div class="hair-info">
+                    <h3>Shampoo</h3>
+                    <p>Gentle formula for deep cleansing and scalp care.</p>
+                    <p class="price">&#8377;599 - &#8377;1,500</p>
+                </div>
+            </div>
+
+            <!-- Conditioner -->
+            <div class="hair-card" onclick="location.href='/hair/conditioner'">
+                <img src="https://i.pinimg.com/736x/88/f1/24/88f12469aa00bb77a0404b5fb4aad117.jpg"
+                     class="hair-img" alt="Conditioner">
+                <div class="hair-info">
+                    <h3>Conditioner</h3>
+                    <p>For smooth, silky, and manageable hair.</p>
+                    <p class="price">&#8377;499 - &#8377;1,200</p>
+                </div>
+            </div>
+
+            <!-- Hair Serum -->
+            <div class="hair-card" onclick="location.href='/hair/hair-serum'">
+                <img src="https://i.pinimg.com/736x/b6/ea/53/b6ea53f07cda06b99d0e55fca80d798c.jpg"
+                     class="hair-img" alt="Hair Serum">
+                <div class="hair-info">
+                    <h3>Hair Serum</h3>
+                    <p>Instant shine and frizz control for sleek hair.</p>
+                    <p class="price">&#8377;699 - &#8377;1,800</p>
+                </div>
+            </div>
+
+            <!-- Hair Mask -->
+            <div class="hair-card" onclick="location.href='/hair/hair-mask'">
+                <img src="https://i.pinimg.com/736x/2e/19/39/2e1939b48f194a3c90fd014304b2ad97.jpg"
+                     class="hair-img" alt="Hair Mask">
+                <div class="hair-info">
+                    <h3>Hair Mask</h3>
+                    <p>Deep conditioning treatment for damaged hair.</p>
+                    <p class="price">&#8377;799 - &#8377;2,200</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

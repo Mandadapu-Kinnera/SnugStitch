@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Products - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #0c0b0b;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .eye-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .eye-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .eye-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .eye-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .eye-info {
+            padding: 1.5rem;
+        }
+
+        .eye-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .eye-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .eye-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Eye Products</h1>
+            <p>Discover eye products that enhance your eye makeup game, from volumizing mascaras to richly pigmented eyeliners.</p>
+        </div>
+
+        <div class="eye-products">
+            <!-- Mascara -->
+            <div class="eye-card" onclick="location.href='/eye/mascara'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.23.24%20-%20A%20high-quality%20volumizing%20mascara%20from%20the%20brand%20SnugStitch.%20The%20mascara%20comes%20in%20a%20sleek%20black%20and%20gold%20tube%20with%20a%20curved%20wand%20applicator.%20The%20packa.webp" 
+                     class="eye-img" alt="Mascara">
+                <div class="eye-info">
+                    <h3>Mascara</h3>
+                    <p>Get voluminous, long lashes with our best-selling mascaras.</p>
+                    <p class="price">₹899 - ₹1,500</p>
+                </div>
+            </div>
+
+            <!-- Eyeliner -->
+            <div class="eye-card" onclick="location.href='/eye/eyeliner'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.24.24%20-%20A%20high-quality%20precision%20liquid%20eyeliner%20from%20the%20brand%20SnugStitch.%20The%20eyeliner%20comes%20in%20a%20sleek%20black%20and%20gold%20pen-like%20packaging%20with%20an%20ultra-fine.webp"
+                     class="eye-img" alt="Eyeliner">
+                <div class="eye-info">
+                    <h3>Eyeliner</h3>
+                    <p>Define your eyes with precise lines and intense black finish.</p>
+                    <p class="price">₹599 - ₹1,200</p>
+                </div>
+            </div>
+
+            <!-- Eyeshadow Palette -->
+            <div class="eye-card" onclick="location.href='/eye/eyeshadow'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.25.01%20-%20A%20high-quality%20intense%20black%20kajal%20from%20the%20brand%20SnugStitch.%20The%20kajal%20comes%20in%20a%20sleek%20black%20and%20gold%20retractable%20pencil%20design.%20The%20packaging%20is%20el.webp" 
+                     class="eye-img" alt="Eyeshadow Palette">
+                <div class="eye-info">
+                    <h3>Eyeshadow Palette</h3>
+                    <p>Richly pigmented shades in matte, shimmer, and glitter finishes.</p>
+                    <p class="price">₹1,299 - ₹3,500</p>
+                </div>
+            </div>
+
+            <!-- Kajal -->
+            <div class="eye-card" onclick="location.href='/eye/kajal'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.25.55%20-%20A%20high-quality%20eyebrow%20definer%20pencil%20from%20the%20brand%20SnugStitch.%20The%20eyebrow%20pencil%20has%20a%20sleek%20black%20and%20gold%20design%20with%20a%20dual-ended%20feature%20%E2%80%93%20one%20.webp"
+                     class="eye-img" alt="Kajal">
+                <div class="eye-info">
+                    <h3>Kajal</h3>
+                    <p>Smudge-proof kajal for bold and dramatic eye looks.</p>
+                    <p class="price">₹299 - ₹800</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Accessories - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #FF3F6C;
+            --light: #FFFFFF;
+            --gray: #040405;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--gray);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            margin-top: 100px;
+            height: 20vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            color: var(--light);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 700px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        .slideshow-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slide-tagline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--light);
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            width: 90%;
+            line-height: 1.2;
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+
+        .slide-btn {
+            background: rgba(255,255,255,0.2);
+            color: var(--light);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: var(--transition);
+            display: grid;
+            place-items: center;
+        }
+
+        .slide-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        
+        .section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--light);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .category-name {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            color: var(--light);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-tagline {
+                font-size: 1.8rem;
+                width: 95%;
+            }
+            
+            .slide-btn {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .category-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="/logout" class="nav-icon">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Luxury Accessories</h1>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2 class="section-title">Shop Luxury Accessories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <a href="{{ url_for('watch') }}">
+                    <img src="https://i.pinimg.com/736x/14/f4/10/14f410e1f2173f27e5ef7d15c0565bf4.jpg">
+                    <div class="category-name">Watch</div>
+                </a>
+            </div>
+       
+            <div class="category-card">
+                <a href="{{ url_for('chains') }}">
+                    <img src="https://i.pinimg.com/736x/61/c3/d4/61c3d45cdd7ece81ab75a260e86a5000.jpg" alt="Formal Pants">
+                    <div class="category-name">Chains</div>
+                </a>
+            </div>
+
+           
+
+            <div class="category-card">
+                <a href="{{ url_for('handbags') }}">
+                    <img src="https://i.pinimg.com/736x/e9/ab/14/e9ab14e6603c8c95500d9485fa195faf.jpg" alt="Regulars">
+                    <div class="category-name">Hand Bags </div>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="{{ url_for('wallets') }}">
+                    <img src="https://i.pinimg.com/736x/e7/89/d3/e789d316e57e7a5eb8859536e872ab03.jpg" alt="Regulars">
+                    <div class="category-name">Wallets</div>
+                </a>
+            </div>
+            
+            
+        </div>
+    </section>
+</body>
+</html>

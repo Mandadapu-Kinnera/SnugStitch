@@ -1,0 +1,14 @@
+SELECT 
+    users.id AS user_id,
+    users.username,
+    users.email,
+    custom_orders.id AS order_id,
+    custom_orders.image_url,
+    custom_orders.clothing_type,
+    custom_orders.fabric_type,
+    custom_orders.measurements,
+    custom_orders.delivery_address,
+    custom_orders.order_date
+FROM custom_orders
+JOIN users ON custom_orders.user_id = users.id
+ORDER BY custom_orders.order_date DESC;

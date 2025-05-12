@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Collection - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .foundation-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .foundation-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .foundation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .foundation-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .foundation-info {
+            padding: 1.5rem;
+        }
+
+        .foundation-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .foundation-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .category-header h1 {
+                font-size: 2rem;
+            }
+            
+            .foundation-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Foundation Collection</h1>
+            <p>Discover your perfect base with our range of high-performance foundations for every skin type and finish</p>
+        </div>
+
+        <div class="foundation-types">
+            <!-- Liquid Foundation -->
+            <div class="foundation-card" onclick="location.href='/foundation/liquid'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.28.21%20-%20A%20high-quality%20liquid%20foundation%20from%20the%20brand%20SnugStitch.%20The%20foundation%20comes%20in%20a%20sleek%20glass%20bottle%20with%20a%20pump%20dispenser.%20The%20packaging%20is%20elega.webp" 
+                     class="foundation-img" alt="Liquid Foundation">
+                <div class="foundation-info">
+                    <h3>Liquid Foundation</h3>
+                    <p>Buildable coverage with natural finish that blends seamlessly into skin</p>
+                    <p class="price">₹1,299 - ₹3,500</p>
+                </div>
+            </div>
+
+            <!-- Matte Foundation -->
+            <div class="foundation-card" onclick="location.href='/foundation/matte'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.30.03%20-%20A%20high-quality%20liquid%20foundation%20from%20the%20brand%20SnugStitch.%20The%20foundation%20comes%20in%20a%20sleek%20glass%20bottle%20with%20a%20pump%20dispenser.%20The%20packaging%20is%20elega.webp" 
+                     class="foundation-img" alt="Matte Foundation">
+                <div class="foundation-info">
+                    <h3>Matte Foundation</h3>
+                    <p>Oil-control formula for shine-free perfection all day</p>
+                    <p class="price">₹1,499 - ₹3,200</p>
+                </div>
+            </div>
+
+            <!-- Serum Foundation -->
+            <div class="foundation-card" onclick="location.href='/foundation/serum'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.30.29%20-%20A%20high-quality%20liquid%20foundation%20from%20the%20brand%20SnugStitch.%20The%20foundation%20comes%20in%20a%20sleek%20glass%20bottle%20with%20a%20pump%20dispenser.%20The%20packaging%20is%20elega.webp"
+                     class="foundation-img" alt="Serum Foundation">
+                <div class="foundation-info">
+                    <h3>Serum Foundation</h3>
+                    <p>Skincare-infused with hyaluronic acid for hydrated, radiant skin</p>
+                    <p class="price">₹1,799 - ₹4,500</p>
+                </div>
+            </div>
+
+            <!-- Glitter Foundation -->
+            <div class="foundation-card" onclick="location.href='/foundation/glitter'">
+                <img src="file:///C:/Users/manda/Downloads/DALL%C2%B7E%202025-03-26%2018.30.54%20-%20A%20high-quality%20liquid%20foundation%20from%20the%20brand%20SnugStitch.%20The%20foundation%20comes%20in%20a%20sleek%20glass%20bottle%20with%20a%20pump%20dispenser.%20The%20packaging%20is%20elega.webp" 
+                     class="foundation-img" alt="Glitter Foundation">
+                <div class="foundation-info">
+                    <h3>Glitter Foundation</h3>
+                    <p>Luminous finish with subtle shimmer for special occasions</p>
+                    <p class="price">₹1,599 - ₹3,800</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

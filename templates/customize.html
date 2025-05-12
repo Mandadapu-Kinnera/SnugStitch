@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Design - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #070707;
+        }
+
+        .customization-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .step-header i {
+            font-size: 2.5em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ddd;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .order-confirmation {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .orders-list {
+            margin-top: 50px;
+            border-top: 2px solid #ddd;
+            padding-top: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        
+        .order-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background: #f8f9fa;
+    padding: 5px;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="customization-container">
+        <form id="customizationForm" enctype="multipart/form-data">
+            <div class="form-step active" data-step="1">
+                <div class="step-header">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h2>Upload Your Design</h2>
+                </div>
+                <div class="form-group">
+                    <div class="image-preview" onclick="document.getElementById('designImage').click()">
+                        <img id="preview" src="#" alt="Preview" style="display: none;">
+                        <span id="uploadText"><i class="fas fa-upload"></i> Click to upload</span>
+                    </div>
+                    <input type="file" id="designImage" name="designImage" accept="image/*" hidden required>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <div class="step-header">
+                    <i class="fas fa-ruler-combined"></i>
+                    <h2>Measurements & Details</h2>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tshirt"></i> Clothing Type</label>
+                    <select name="clothingType" required>
+                        <option value="">Select Clothing Type</option>
+                        <option value="dress">Dress</option>
+                        <option value="lehenga">Lehenga</option>
+                        <option value="suit">Suit</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-weight"></i> Fabric Type</label>
+                    <select name="fabricType" required>
+                        <option value="">Select Fabric</option>
+                        <option value="silk">Silk</option>
+                        <option value="cotton">Cotton</option>
+                        <option value="linen">Linen</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-ruler"></i> Measurements (cm)</label>
+                    <textarea name="measurements" placeholder="Enter your measurements..." required></textarea>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <div class="step-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2>Delivery Address</h2>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-home"></i> Street Address</label>
+                    <input type="text" name="street" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-city"></i> City</label>
+                    <input type="text" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-flag"></i> State</label>
+                    <input type="text" name="state" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-mail-bulk"></i> ZIP Code</label>
+                    <input type="text" name="zip" pattern="\d{6}" required>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn-secondary" onclick="previousStep()" id="prevBtn" style="display: none;">Previous</button>
+                <button type="button" class="btn-primary" onclick="nextStep()" id="nextBtn">Next</button>
+            </div>
+        </form>
+
+        <div class="order-confirmation" id="confirmation">
+            <i class="fas fa-check-circle" style="font-size: 50px; color: #2ecc71;"></i>
+            <h2>Order Submitted Successfully!</h2>
+            <p>Your custom design will be delivered within 2 working days.</p>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+            <h2>Recent Custom Orders</h2>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.querySelector(`[data-step="${step}"]`).classList.add('active');
+            
+            document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').textContent = step === totalSteps ? 'Submit Order' : 'Next';
+        }
+
+        function nextStep() {
+            if (currentStep === totalSteps) {
+                submitForm();
+                return;
+            }
+            
+            if (validateStep(currentStep)) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep() {
+            currentStep--;
+            showStep(currentStep);
+        }
+
+        function validateStep(step) {
+            const inputs = document.querySelectorAll(`[data-step="${step}"] [required]`);
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+            
+            return isValid;
+        }
+
+       
+        function submitForm() {
+    if (validateStep(currentStep)) {
+        const formData = new FormData(document.getElementById('customizationForm'));
+        
+        fetch('/submit-custom-order', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => Promise.reject(err));
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                document.getElementById('customizationForm').style.display = 'none';
+                document.getElementById('confirmation').style.display = 'block';
+                loadOrders();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Submission failed: ${error.error || 'Unknown error'}`);
+        });
+    }
+}
+
+        function loadOrders() {
+            fetch('/get-custom-orders')
+                .then(response => response.json())
+                .then(orders => {
+                    const container = document.getElementById('ordersList');
+                    container.innerHTML = '<h2>Recent Custom Orders</h2>';
+                    
+                    orders.forEach(order => {
+
+                        const orderHTML = `
+    <div class="order-card">
+        <img src="/static/uploads/${order.image_url}" class="order-image">
+        <div>
+            <h3>${order.clothing_type} (${order.fabric_type})</h3>
+            <p>Measurements: ${order.measurements}</p>
+            <p>Address: ${order.delivery_address}</p>
+            <small>Ordered on ${new Date(order.order_date).toLocaleDateString()}</small>
+        </div>
+    </div>
+`;
+                        container.innerHTML += orderHTML;
+                    });
+                });
+        }
+
+        document.getElementById('designImage').addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('preview').src = reader.result;
+                document.getElementById('preview').style.display = 'block';
+                document.getElementById('uploadText').style.display = 'none';
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        loadOrders();
+    </script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Design - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f6fa;
+            color: #333;
+        }
+
+        .customization-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .step-header i {
+            font-size: 2.5em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .image-preview {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ddd;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1a252f;
+        }
+
+        .order-confirmation {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .orders-list {
+            margin-top: 50px;
+            border-top: 2px solid #ddd;
+            padding-top: 30px;
+        }
+
+        .order-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .order-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            background: #f8f9fa;
+            padding: 5px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .option-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .option-card:hover {
+            border-color: var(--secondary-color);
+            transform: scale(1.03);
+        }
+
+        .option-card.selected {
+            border-color: var(--success-color);
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .option-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        .color-option.selected {
+            border-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .feature-highlight {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .feature-highlight i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .timer-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .phone-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-input select {
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .phone-input input {
+            flex: 1;
+        }
+
+        .guarantee-banner {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="customization-container">
+        <div class="guarantee-banner">
+            <h2><i class="fas fa-bolt"></i> Express Delivery Guarantee!</h2>
+            <p>Custom stitched and delivered to your doorstep within 2 working days or your money back!</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+
+        <form id="customizationForm" enctype="multipart/form-data">
+            <div class="form-step active" data-step="1">
+                <div class="step-header">
+                    <i class="fas fa-tshirt"></i>
+                    <h2>Select Clothing Category</h2>
+                    <p>Choose the type of clothing you want to customize</p>
+                </div>
+
+                <div class="feature-highlight">
+                    <i class="fas fa-star"></i>
+                    <strong>Why choose us?</strong> 100% hand-stitched by master tailors with premium fabrics and fastest delivery!
+                </div>
+
+                <div class="form-group">
+                    <label>Clothing Category</label>
+                    <select name="clothingCategory" id="clothingCategory" required onchange="updateSubcategories()">
+                        <option value="">Select Category</option>
+                        <option value="womens_wear">👗 Women's Wear</option>
+                        <option value="mens_wear">👔 Men's Wear</option>
+                        <option value="kids_wear">👶 Kids' Wear</option>
+                        <option value="unisex">🌈 Unisex & Special Categories</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="subcategoryGroup">
+                    <label>Clothing Type</label>
+                    <select name="clothingType" id="clothingType" required>
+                        <option value="">First select a category</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <div class="step-header">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h2>Upload Your Design</h2>
+                    <p>Upload an image or sketch of your design (optional but recommended)</p>
+                </div>
+
+                <div class="feature-highlight">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Design Tip:</strong> Our designers will enhance your sketch with professional details for free!
+                </div>
+
+                <div class="form-group">
+                    <div class="image-preview" onclick="document.getElementById('designImage').click()">
+                        <img id="preview" src="#" alt="Preview" style="display: none;">
+                        <span id="uploadText"><i class="fas fa-upload"></i> Click to upload design</span>
+                    </div>
+                    <input type="file" id="designImage" name="designImage" accept="image/*" hidden>
+                    <small class="text-muted">Max file size: 5MB (JPG, PNG, GIF)</small>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comment-alt"></i> Design Description</label>
+                    <textarea name="designDescription" placeholder="Describe your design in detail..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <div class="step-header">
+                    <i class="fas fa-sliders-h"></i>
+                    <h2>Customization Options</h2>
+                    <p>Personalize every detail of your outfit</p>
+                </div>
+
+                <div id="customizationOptions">
+                   
+                </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+                <div class="step-header">
+                    <i class="fas fa-ruler-combined"></i>
+                    <h2>Your Measurements</h2>
+                    <p>Provide your measurements for perfect fit</p>
+                </div>
+
+                <div class="feature-highlight">
+                    <i class="fas fa-user-edit"></i>
+                    <strong>Not sure about measurements?</strong> Our expert tailors will contact you for verification.
+                </div>
+
+                <div class="form-group">
+                    <label>Standard Size</label>
+                    <select name="standardSize" id="standardSize">
+                        <option value="">Select standard size (optional)</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="custom">Custom Measurements</option>
+                    </select>
+                </div>
+
+                <div id="measurementFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Chest (inches)</label>
+                        <input type="number" name="chest" min="20" max="60" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Waist (inches)</label>
+                        <input type="number" name="waist" min="20" max="60" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Hips (inches)</label>
+                        <input type="number" name="hips" min="20" max="60" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Length (inches)</label>
+                        <input type="number" name="length" min="10" max="80" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Sleeve Length (inches)</label>
+                        <input type="number" name="sleeveLength" min="0" max="40" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Measurements</label>
+                        <textarea name="additionalMeasurements" placeholder="Any special measurements or fit preferences..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="5">
+                <div class="step-header">
+                    <i class="fas fa-truck"></i>
+                    <h2>Delivery Information <span class="timer-badge">2-Day Delivery</span></h2>
+                    <p>Where should we deliver your custom outfit?</p>
+                </div>
+
+                <div class="feature-highlight">
+                    <i class="fas fa-shield-alt"></i>
+                    <strong>100% Satisfaction Guarantee:</strong> Free alterations if you're not completely satisfied!
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Phone Number (for delivery updates)</label>
+                    <div class="phone-input">
+                        <select name="countryCode" required>
+                            <option value="+91">🇮🇳 +91</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+971">🇦🇪 +971</option>
+                        </select>
+                        <input type="tel" name="phone" pattern="[0-9]{10}" required placeholder="10-digit phone number">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-home"></i> Street Address</label>
+                    <input type="text" name="street" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-city"></i> City</label>
+                    <input type="text" name="city" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-flag"></i> State</label>
+                    <input type="text" name="state" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-mail-bulk"></i> ZIP Code</label>
+                    <input type="text" name="zip" pattern="\d{6}" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Delivery Date Preference</label>
+                    <input type="date" name="deliveryDate" min="" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comments"></i> Special Instructions</label>
+                    <textarea name="specialInstructions" placeholder="Any special delivery instructions..."></textarea>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn-secondary" onclick="previousStep()" id="prevBtn" style="display: none;">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button type="button" class="btn-primary" onclick="nextStep()" id="nextBtn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+
+        <div class="order-confirmation" id="confirmation">
+            <i class="fas fa-check-circle" style="font-size: 50px; color: var(--success-color);"></i>
+            <h2>Order Submitted Successfully!</h2>
+            <p>Your custom design is being processed by our master tailors.</p>
+            <p><strong>Delivery Date:</strong> <span id="deliveryDateDisplay"></span> (within 2 working days)</p>
+            <p>We'll send SMS updates to your phone and email you the design proof within 12 hours.</p>
+            <button class="btn-primary" onclick="window.location.reload()">
+                <i class="fas fa-plus"></i> Create Another Design
+            </button>
+        </div>
+
+        <div class="orders-list" id="ordersList">
+            <h2><i class="fas fa-history"></i> Recent Custom Orders</h2>
+            <p>See examples of custom designs we've created for our customers</p>
+        </div>
+    </div>
+
+    <script>
+        const customizationOptions = {
+            womens_wear: {
+                dresses: {
+                    types: ["Maxi", "Midi", "Mini", "A-line", "Bodycon", "Wrap", "Shirt", "Peplum", "Sheath", "Fit & Flare"],
+                    colors: {
+                        solid: ["Red", "Blue", "Black", "White", "Green", "Yellow", "Pink", "Purple"],
+                        gradient: ["Sunset", "Ocean", "Rainbow", "Pastel"],
+                        patterns: ["Floral", "Abstract", "Stripes", "Polka dots", "Animal prints"]
+                    },
+                    fabrics: ["Cotton", "Satin", "Silk", "Georgette", "Chiffon", "Linen"],
+                    textures: ["Smooth", "Crinkled", "Ruffled", "Lace", "Mesh"],
+                    embellishments: ["Embroidery", "Sequin work", "Beads", "Stones", "None"]
+                },
+                lehengas: {
+                    types: ["A-line", "Mermaid", "Circular", "Panelled", "Flared", "Straight"],
+                    colors: {
+                        solid: ["Red", "Gold", "Blue", "Green", "Pink", "Purple"],
+                        ombre: ["Red to Gold", "Blue to Silver", "Pink to White"],
+                        dualTone: ["Red & Gold", "Blue & Silver", "Green & Gold"]
+                    },
+                    fabrics: ["Velvet", "Silk", "Net", "Brocade", "Organza"],
+                    borders: ["Zari", "Gota-patti", "Lace", "Mirror work", "None"],
+                    embroidery: ["Zardosi", "Thread", "Sequin", "Beadwork", "None"],
+                    dupatta: ["Contrast", "Matching", "Custom print"]
+                },
+                sarees: {
+                    types: ["Banarasi", "Kanjeevaram", "Chiffon", "Georgette", "Silk", "Cotton", "Organza"],
+                    colors: ["Solid", "Gradient", "Dual-tone", "Printed"],
+                    fabrics: ["Silk", "Cotton", "Georgette", "Chiffon", "Linen"],
+                    borders: ["Embellished", "Zari", "Sequin", "Lace", "None"],
+                    blouse: ["Plain", "Embroidered", "Custom fit"],
+                    pallu: ["Plain", "Heavy work", "Custom print"]
+                },
+                ethnic_sets: {
+                    types: ["Kurta-Palazzo", "Salwar-Kameez", "Anarkali", "Sharara"],
+                    colors: ["Pastel", "Jewel tones", "Earthy hues"],
+                    fabrics: ["Cotton", "Rayon", "Georgette", "Silk", "Brocade"],
+                    embroidery: ["Zari", "Thread work", "Mirror", "Sequins", "None"],
+                    sleeveLength: ["Sleeveless", "Short", "3/4th", "Full"],
+                    neckline: ["Round", "V-neck", "Boat", "Mandarin collar"]
+                },
+                tops: {
+                    types: ["Casual", "Formal", "Crop", "Peplum", "Off-shoulder", "Halter"],
+                    colors: ["Solid", "Dual-tone", "Ombre", "Printed"],
+                    fabrics: ["Denim", "Cotton", "Linen", "Satin", "Crepe"],
+                    neckline: ["V-neck", "Round", "Boat", "Square"],
+                    sleeveStyle: ["Ruffled", "Bell", "Puff", "Cuffed"],
+                    length: ["Cropped", "Hip-length", "Tunic-length"]
+                }
+            },
+            mens_wear: {
+                shirts: {
+                    types: ["Formal", "Casual", "Slim-fit", "Oversized", "Printed", "Denim"],
+                    colors: ["Solid", "Dual-tone", "Striped", "Checkered"],
+                    fabrics: ["Cotton", "Linen", "Chambray", "Satin"],
+                    collarStyle: ["Spread", "Mandarin", "Wing", "Band"],
+                    sleeveLength: ["Half", "Full", "Rolled-up"],
+                    buttonStyle: ["Regular", "Pearl", "Snap"]
+                },
+                tshirts: {
+                    types: ["Polo", "Round-neck", "V-neck", "Henley", "Graphic"],
+                    colors: ["Solid", "Gradient", "Contrast"],
+                    fabrics: ["Cotton", "Polyester", "Jersey", "Dry-fit"],
+                    prints: ["Text", "Logo", "Custom graphic"],
+                    sleeveStyle: ["Cap", "Raglan", "Long", "Sleeveless"],
+                    fit: ["Slim", "Regular", "Oversized"]
+                },
+                blazers: {
+                    types: ["Single-breasted", "Double-breasted", "Tuxedo", "Nehru jacket"],
+                    colors: ["Navy", "Charcoal", "Black", "Pastel", "Checked"],
+                    fabrics: ["Wool", "Cotton", "Linen", "Velvet"],
+                    lapelStyle: ["Notch", "Peak", "Shawl"],
+                    buttons: ["Two-button", "Three-button", "Custom metal"],
+                    lining: ["Plain", "Patterned", "Contrast"]
+                },
+                ethnic_wear: {
+                    types: ["Kurta", "Sherwani", "Bandhgala", "Nehru Jacket"],
+                    colors: ["Earthy", "Royal tones", "Pastel"],
+                    fabrics: ["Silk", "Linen", "Brocade", "Velvet"],
+                    embroidery: ["Zari", "Sequin", "Mirror", "Resham", "None"],
+                    fit: ["Slim", "Regular", "Relaxed"],
+                    collarStyle: ["Mandarin", "Round", "Stand"]
+                }
+            },
+            kids_wear: {
+                dresses: {
+                    types: ["Frocks", "Party dresses", "Gowns", "Casual"],
+                    colors: ["Bright", "Pastel", "Neon", "Printed"],
+                    fabrics: ["Cotton", "Tulle", "Satin", "Denim"],
+                    prints: ["Cartoon characters", "Florals", "Abstract"],
+                    embellishments: ["Glitter", "Sequins", "Bows", "None"]
+                },
+                ethnic_wear: {
+                    types: ["Lehenga-choli", "Sherwani", "Kurta-Pajama"],
+                    colors: ["Festive tones", "Dual-shade"],
+                    fabrics: ["Silk", "Cotton", "Linen"],
+                    embroidery: ["Mirror", "Sequin", "Thread", "None"],
+                    fit: ["Regular", "Custom-fit"]
+                }
+            },
+            unisex: {
+                activewear: {
+                    types: ["T-shirts", "Joggers", "Shorts", "Yoga Pants"],
+                    colors: ["Solid", "Neon", "Contrast"],
+                    fabrics: ["Dry-fit", "Polyester", "Spandex"],
+                    fit: ["Slim", "Regular", "Loose"],
+                    prints: ["Custom logo", "Text"]
+                },
+                loungewear: {
+                    types: ["Pajama sets", "Nightgowns", "Robes"],
+                    colors: ["Pastels", "Dark hues"],
+                    fabrics: ["Cotton", "Satin", "Rayon"],
+                    prints: ["Florals", "Polka dots", "Cartoon"],
+                    fit: ["Relaxed", "Custom fit"]
+                },
+                pet_clothing: {
+                    types: ["Sweaters", "Jackets", "Bandanas", "Collars"],
+                    colors: ["Bright", "Neutral", "Printed"],
+                    fabrics: ["Wool", "Cotton", "Polyester"],
+                    sizes: ["XS", "S", "M", "L", "XL"],
+                    prints: ["Paw prints", "Cartoon", "Custom name"]
+                }
+            }
+        };
+
+        let currentStep = 1;
+        const totalSteps = 5;
+        let selectedOptions = {
+            category: '',
+            type: '',
+            customization: {}
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.querySelector('input[name="deliveryDate"]').min = tomorrow.toISOString().split('T')[0];
+         
+            loadOrders();
+            
+            updateProgressBar();
+        });
+
+        function updateProgressBar() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(stepEl => {
+                stepEl.classList.remove('active');
+            });
+            document.querySelector(`[data-step="${step}"]`).classList.add('active');
+            
+            document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').innerHTML = step === totalSteps ? 
+                'Submit Order <i class="fas fa-check"></i>' : 
+                'Next <i class="fas fa-arrow-right"></i>';
+            
+            updateProgressBar();
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() {
+            if (currentStep === totalSteps) {
+                submitForm();
+                return;
+            }
+            
+            if (validateStep(currentStep)) {
+                currentStep++;
+                
+                if (currentStep === 3) {
+                    loadCustomizationOptions();
+                }
+                
+                showStep(currentStep);
+            }
+        }
+
+        function previousStep() {
+            currentStep--;
+            showStep(currentStep);
+        }
+
+        function validateStep(step) {
+            const inputs = document.querySelectorAll(`[data-step="${step}"] [required]`);
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+            
+            return isValid;
+        }
+
+        function updateSubcategories() {
+            const category = document.getElementById('clothingCategory').value;
+            const subcategorySelect = document.getElementById('clothingType');
+            
+            subcategorySelect.innerHTML = '<option value="">Select Type</option>';
+            
+            if (category && customizationOptions[category]) {
+                const types = Object.keys(customizationOptions[category]);
+                
+                types.forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type;
+                    option.textContent = type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    subcategorySelect.appendChild(option);
+                });
+            }
+            
+            selectedOptions.category = category;
+        }
+
+        function loadCustomizationOptions() {
+            const category = document.getElementById('clothingCategory').value;
+            const type = document.getElementById('clothingType').value;
+            const container = document.getElementById('customizationOptions');
+            
+            if (!category || !type || !customizationOptions[category] || !customizationOptions[category][type]) {
+                container.innerHTML = '<p>Please select a valid clothing type</p>';
+                return;
+            }
+            
+            selectedOptions.type = type;
+            const options = customizationOptions[category][type];
+            let html = '';
+           
+            if (options.types && options.types.length > 0) {
+                html += `
+                    <div class="form-group">
+                        <label><i class="fas fa-tshirt"></i> ${type.replace(/_/g, ' ')} Type</label>
+                        <div class="options-grid">
+                            ${options.types.map(t => `
+                                <div class="option-card" onclick="selectOption(this, 'type', '${t}')">
+                                    <i class="fas fa-tshirt" style="font-size: 30px;"></i>
+                                    <p>${t}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <input type="hidden" name="specificType" id="specificType" required>
+                    </div>
+                `;
+            }
+
+            if (options.colors) {
+                html += `
+                    <div class="form-group">
+                        <label><i class="fas fa-palette"></i> Color Options</label>
+                        ${Object.entries(options.colors).map(([colorType, colors]) => `
+                            <div style="margin-bottom: 15px;">
+                                <h4>${colorType.charAt(0).toUpperCase() + colorType.slice(1)} Colors</h4>
+                                ${colors.map(color => `
+                                    <div class="color-option" 
+                                         style="background-color: ${getColorHex(color)}"
+                                         onclick="selectColor(this, '${colorType}', '${color}')"
+                                         title="${color}"></div>
+                                `).join('')}
+                                <input type="hidden" name="${colorType}Color" id="${colorType}Color">
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+           
+            if (options.fabrics) {
+                html += `
+                    <div class="form-group">
+                        <label><i class="fas fa-cut"></i> Fabric Type</label>
+                        <div class="options-grid">
+                            ${options.fabrics.map(fabric => `
+                                <div class="option-card" onclick="selectOption(this, 'fabric', '${fabric}')">
+                                    <i class="fas fa-cut" style="font-size: 30px;"></i>
+                                    <p>${fabric}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <input type="hidden" name="fabric" id="fabric" required>
+                    </div>
+                `;
+            }
+            
+            const otherOptions = Object.entries(options).filter(
+                ([key]) => !['types', 'colors', 'fabrics'].includes(key)
+            );
+            
+            otherOptions.forEach(([optionName, values]) => {
+                if (Array.isArray(values)) {
+                    html += `
+                        <div class="form-group">
+                            <label><i class="fas fa-sliders-h"></i> ${optionName.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</label>
+                            <div class="options-grid">
+                                ${values.map(value => `
+                                    <div class="option-card" onclick="selectOption(this, '${optionName}', '${value}')">
+                                        <p>${value}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <input type="hidden" name="${optionName}" id="${optionName}">
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectOption(element, optionName, value) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+          
+            document.getElementById(optionName).value = value;
+          
+            selectedOptions.customization[optionName] = value;
+        }
+
+        function selectColor(element, colorType, color) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.color-option').forEach(colorEl => {
+                colorEl.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            
+            document.getElementById(`${colorType}Color`).value = color;
+            
+            selectedOptions.customization[`${colorType}Color`] = color;
+        }
+
+        function getColorHex(colorName) {
+            const colors = {
+                'Red': '#ff0000',
+                'Blue': '#0000ff',
+                'Black': '#000000',
+                'White': '#ffffff',
+                'Green': '#00ff00',
+                'Yellow': '#ffff00',
+                'Pink': '#ffc0cb',
+                'Purple': '#800080',
+                'Gold': '#ffd700',
+                'Silver': '#c0c0c0',
+                'Charcoal': '#36454f',
+                'Navy': '#000080',
+                'Pastel': '#f8c8dc',
+                'Neon': '#39ff14',
+                'Earthy': '#a0522d',
+                'Royal': '#7851a9'
+            };
+            
+            return colors[colorName] || '#cccccc';
+        }
+
+        // Handle measurement fields visibility
+        document.getElementById('standardSize').addEventListener('change', function() {
+            const measurementFields = document.getElementById('measurementFields');
+            measurementFields.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // Image preview handler
+        document.getElementById('designImage').addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('preview').src = reader.result;
+                document.getElementById('preview').style.display = 'block';
+                document.getElementById('uploadText').style.display = 'none';
+            }
+            if (e.target.files[0]) {
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        function submitForm() {
+            if (validateStep(currentStep)) {
+                const formData = new FormData(document.getElementById('customizationForm'));
+                
+                formData.append('category', selectedOptions.category);
+                formData.append('type', selectedOptions.type);
+                formData.append('customization', JSON.stringify(selectedOptions.customization));
+              
+                const deliveryDate = new Date(formData.get('deliveryDate'));
+                document.getElementById('deliveryDateDisplay').textContent = deliveryDate.toDateString();
+                
+                setTimeout(() => {
+                    document.getElementById('customizationForm').style.display = 'none';
+                    document.getElementById('confirmation').style.display = 'block';
+                    loadOrders();
+                }, 1000);
+                
+               
+                
+                fetch('/submit-custom-order', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('customizationForm').style.display = 'none';
+                        document.getElementById('confirmation').style.display = 'block';
+                        loadOrders();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Submission failed. Please try again.');
+                });
+                
+            }
+        }
+
+        function loadOrders() {
+            const sampleOrders = [
+                {
+                    id: 1,
+                    category: 'womens_wear',
+                    type: 'dresses',
+                    specificType: 'A-line',
+                    color: 'Red',
+                    fabric: 'Silk',
+                    embroidery: 'Zardosi',
+                    image_url: 'dress1.jpg',
+                    order_date: '2023-06-15',
+                    delivery_address: '123 Fashion St, Mumbai'
+                },
+                {
+                    id: 2,
+                    category: 'mens_wear',
+                    type: 'shirts',
+                    specificType: 'Formal',
+                    color: 'Blue',
+                    fabric: 'Cotton',
+                    collarStyle: 'Spread',
+                    image_url: 'shirt1.jpg',
+                    order_date: '2023-06-10',
+                    delivery_address: '456 Tailor Ave, Delhi'
+                },
+                {
+                    id: 3,
+                    category: 'kids_wear',
+                    type: 'dresses',
+                    specificType: 'Party',
+                    color: 'Pink',
+                    fabric: 'Tulle',
+                    embellishments: 'Sequins',
+                    image_url: 'kids1.jpg',
+                    order_date: '2023-06-05',
+                    delivery_address: '789 Design Rd, Bangalore'
+                }
+            ];
+            
+            const container = document.getElementById('ordersList');
+            container.innerHTML = `
+                <h2><i class="fas fa-history"></i> Recent Custom Orders</h2>
+                <p>See examples of custom designs we've created for our customers</p>
+            `;
+            
+            sampleOrders.forEach(order => {
+                const orderHTML = `
+                    <div class="order-card">
+                        <img src="https://example.com/images/${order.image_url}" class="order-image">
+                        <div>
+                            <h3>${order.type.replace(/_/g, ' ').toUpperCase()} (${order.specificType})</h3>
+                            <p><strong>Fabric:</strong> ${order.fabric} | <strong>Color:</strong> ${order.color}</p>
+                            ${order.embroidery ? `<p><strong>Embellishments:</strong> ${order.embroidery}</p>` : ''}
+                            ${order.collarStyle ? `<p><strong>Collar:</strong> ${order.collarStyle}</p>` : ''}
+                            <p><strong>Delivered to:</strong> ${order.delivery_address}</p>
+                            <small>Ordered on ${new Date(order.order_date).toLocaleDateString()}</small>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += orderHTML;
+            });
+        }
+
+    
+    </script>
+</body>
+</html>  -->

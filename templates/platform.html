@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Heels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #0b0b0b;
+        }
+
+        .navbar {
+            background: rgb(9, 10, 10);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e83e8c;
+            text-decoration: none;
+        }
+
+        .nav-icons a {
+            color: #eeeeee;
+            margin-left: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .products-container {
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-price {
+            color: #e83e8c;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .product-modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .size-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-btn.selected {
+            background: #e83e8c;
+            color: white;
+            border-color: #e83e8c;
+        }
+
+        .action-buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pink {
+            background: #e83e8c;
+            color: white;
+        }
+
+        .btn-outline {
+            border: 2px solid #e83e8c;
+            color: #e83e8c;
+            background: transparent;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #e83e8c;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-icons">
+            <a href="/profile"><i class="fas fa-user"></i></a>
+            <a href="/wishlist"><i class="fas fa-heart"></i></a>
+            <a href="/cart"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </nav>
+
+    <div class="products-container">
+        <div class="product-card" onclick="showProductModal('tshirt1')">
+            <img src="https://i.pinimg.com/736x/de/d2/70/ded2707cb01620015e882cd30b3f7c83.jpg" class="product-image" alt="T-Shirt 1">
+            <div class="product-info">
+                <h3>Elegant high platform Heels</h3>
+                <p class="product-price">₹599</p>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showProductModal('tshirt2')">
+            <img src="https://i.pinimg.com/736x/37/97/29/37972949dd7035cc2a7d7d6d5843a740.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Platform Chunky</h3>
+                <p class="product-price">₹799</p>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showProductModal('tshirt3')">
+            <img src="https://img.fantaskycdn.com/aa0fa58b01041ca1b3673dfd8a7e8436_750x.jpeg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Chunky Lug Sole Heels</h3>
+                <p class="product-price">₹799</p>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showProductModal('tshirt4')">
+            <img src="https://i.pinimg.com/736x/61/d9/7d/61d97d0059fe8e5b6679f1f8fa9c3c55.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Square Toe Block Platforms</h3>
+                <p class="product-price">₹999</p>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="showProductModal('tshirt5')">
+            <img src="https://i.pinimg.com/736x/2f/cc/2d/2fcc2dbd90fb1768180ce0c67c3a236e.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Blocked Platform</h3>
+                <p class="product-price">₹799</p>
+            </div>
+        </div>
+        <div class="product-card" onclick="showProductModal('tshirt6')">
+            <img src="https://i.pinimg.com/736x/61/88/5e/61885e3594bac534205710bbc4244e4f.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Julep Boutique</h3>
+                <p class="product-price">₹349</p>
+            </div>
+        </div>
+        <div class="product-card" onclick="showProductModal('tshirt7')">
+            <img src="https://i.pinimg.com/736x/d3/f5/3d/d3f53d320ac198466ab64abb1e2971e8.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Lug Sole</h3>
+                <p class="product-price">₹499</p>
+            </div>
+        </div>
+        <div class="product-card" onclick="showProductModal('tshirt8')">
+            <img src="https://i.pinimg.com/736x/45/d8/c0/45d8c06e65528cf79b8cd09dd8f926c7.jpg" class="product-image" alt="T-Shirt 2">
+            <div class="product-info">
+                <h3>Platform</h3>
+                <p class="product-price">₹399</p>
+            </div>
+        </div>
+
+    </div> 
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="product-modal">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="https://via.placeholder.com/400x500" id="modalImage" class="product-image" alt="Product">
+            <div class="product-info">
+                <h2 id="productTitle">Product Title</h2>
+                <p class="product-price" id="productPrice">₹0</p>
+                
+                <div class="size-options">
+                    <div class="size-btn" onclick="selectSize(this)">S</div>
+                    <div class="size-btn" onclick="selectSize(this)">M</div>
+                    <div class="size-btn" onclick="selectSize(this)">L</div>
+                    <div class="size-btn" onclick="selectSize(this)">XL</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-pink" onclick="addToCart()">
+                        <i class="fas fa-shopping-bag"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-outline" onclick="addToWishlist()">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedSize = null;
+        let currentProduct = null;
+
+        function showProductModal(productId) {
+            currentProduct = productId;
+            const modal = document.getElementById('modalOverlay');
+            modal.style.display = 'flex';
+            
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            selectedSize = null;
+        }
+
+        function selectSize(element) {
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedSize = element.innerText;
+        }
+
+        function addToCart() {
+    if (!selectedSize) {
+        alert('Please select a size first!');
+        return;
+    }
+
+    fetch(/add_to_cart/${currentProduct}, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: size=${encodeURIComponent(selectedSize)}
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url; // Redirect if needed
+        } else {
+            alert('Item added to cart!');
+            closeModal();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+        function addToWishlist() {
+            alert(Added ${currentProduct} to wishlist!);
+            closeModal();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalOverlay');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blush Powders - SnugStitch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF3F6C;
+            --secondary: #FF6B90;
+            --dark: #1a1a1a;
+            --light: #FFFFFF;
+            --gray: #f5f5f5;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 5%;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h1 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .blush-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blush-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .blush-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .blush-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .blush-info {
+            padding: 1.5rem;
+        }
+
+        .blush-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .blush-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-header h1 {
+                font-size: 2rem;
+            }
+
+            .blush-products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">SnugStitch</a>
+        <div class="nav-links">
+            <a href="/wishlist" class="nav-icon">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="/cart" class="nav-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+            </a>
+            <a href="/profile" class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="category-header">
+            <h1>Blush Powders</h1>
+            <p>Discover the perfect blush powders to give your cheeks a natural flush, radiant glow, or bold color.</p>
+        </div>
+
+        <div class="blush-products">
+            <!-- Matte Blush -->
+            <div class="blush-card" onclick="location.href='/blush/matte'">
+                <img src="https://i.pinimg.com/474x/f4/6a/54/f46a547e8924fa69ca84f84f4b71b26e.jpg" 
+                     class="blush-img" alt="Matte Blush">
+                <div class="blush-info">
+                    <h3>Matte Blush</h3>
+                    <p>Get a soft, matte finish for a natural flush on your cheeks.</p>
+                    <p class="price">₹799 - ₹1,400</p>
+                </div>
+            </div>
+
+            <!-- Shimmer Blush -->
+            <div class="blush-card" onclick="location.href='/blush/shimmer'">
+                <img src="https://i.pinimg.com/474x/6a/8a/38/6a8a38dc3582d1f9314bcb1abe37080c.jpg" 
+                     class="blush-img" alt="Shimmer Blush">
+                <div class="blush-info">
+                    <h3>Shimmer Blush</h3>
+                    <p>Add a radiant glow with shimmer blush for that extra shine.</p>
+                    <p class="price">₹899 - ₹1,600</p>
+                </div>
+            </div>
+
+            <!-- Cream Blush -->
+            <div class="blush-card" onclick="location.href='/blush/cream'">
+                <img src="https://i.pinimg.com/474x/1e/f7/3e/1ef73e7ba4ae1e167065231026255c1d.jpg" 
+                     class="blush-img" alt="Cream Blush">
+                <div class="blush-info">
+                    <h3>Cream Blush</h3>
+                    <p>Blendable, creamy texture for a dewy, natural look.</p>
+                    <p class="price">₹699 - ₹1,500</p>
+                </div>
+            </div>
+
+            <!-- Blush Palette -->
+            <div class="blush-card" onclick="location.href='/blush/palette'">
+                <img src="https://i.pinimg.com/736x/2f/11/6f/2f116f755dedaf46a3ef8d0721f37b9d.jpg"
+                     class="blush-img" alt="Blush Palette">
+                <div class="blush-info">
+                    <h3>Blush Palette</h3>
+                    <p>Mix and match shades with versatile blush palettes.</p>
+                    <p class="price">₹1,499 - ₹3,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
