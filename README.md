@@ -23,13 +23,19 @@ SnugStitch is a web-based application designed to streamline the process of disc
 
 
 SnugStitch/
-│
+
 ├── static/                # CSS, JS, and image assets
-├── templates/             # HTML templates
-│   ├── index.html
-│   ├── menstshirts.html
-│   └── womenstshirts.html
+
+├── templates/ 
+
+│      ├── index.html
+
+│      ├── menstshirts.html
+
+│      └── womenstshirts.html
+
 ├── app.py                 # Main Flask application
+
 └── README.md              # Project documentation
 
 
